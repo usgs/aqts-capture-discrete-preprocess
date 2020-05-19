@@ -6,7 +6,7 @@ public class TimeSeries {
     public String getUniqueId() {
         return jsonDataId;
     }
-    public void setJsonDataId(Int jsonDataId) {
+    public void setJsonDataId(int jsonDataId) {
         this.jsonDataId = jsonDataId;
     }
     public String getDataType() {
