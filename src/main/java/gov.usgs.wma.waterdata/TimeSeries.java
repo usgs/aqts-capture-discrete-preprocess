@@ -1,9 +1,18 @@
 package gov.usgs.wma.waterdata;
 
 public class TimeSeries {
-    private String uniqueId;
+    private String jsonDataId;
     private String dataType;
     public String getUniqueId() {
-        return uniqueId;
+        return jsonDataId;
+    }
+    public void setJsonDataId(Int jsonDataId) {
+        this.jsonDataId = jsonDataId;
+    }
+    public String getDataType() {
+        return dataType;
+    }
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 }
