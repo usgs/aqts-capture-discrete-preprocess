@@ -40,11 +40,11 @@ select
 from (
   select
     a.json_data_id,
-    jsonb_array_elements(jsonb_extract_path(a.inspection_activity, 'Readings')) as reading
+    jsonb_array_elements(jsonb_extract_path(a.inspection_activity, 'Readings')) reading
     from (
       select
         jd.json_data_id,
-        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') as inspection_activity
+        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') inspection_activity
         from (
           json_data jd
         )
