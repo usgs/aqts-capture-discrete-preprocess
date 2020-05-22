@@ -66,10 +66,5 @@ public class ProcessFieldVisitIT {
 		ResultObject result = processFieldVisit.apply(request);
 		assertNotNull(result);
 		assertEquals(1, result.getId());
-
-		// TODO do we need this assertion for this particular etl?
-		assertThrows(DuplicateKeyException.class, () -> {
-			processFieldVisit.apply(request);
-		}, "This function is not set up to process the same file more than once and should fail if it does.");
 	}
 }
