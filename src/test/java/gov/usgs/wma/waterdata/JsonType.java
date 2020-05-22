@@ -19,7 +19,11 @@ public class JsonType extends AbstractDataType {
 
 	@Override
 	public Object typeCast(Object value) throws TypeCastException {
-		return value.toString();
+		if (null == value) {
+			return null;
+		} else {
+			return value.toString();
+		}
 	}
 
 	@Override

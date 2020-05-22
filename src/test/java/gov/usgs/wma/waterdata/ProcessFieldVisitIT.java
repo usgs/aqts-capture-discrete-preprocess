@@ -2,7 +2,6 @@ package gov.usgs.wma.waterdata;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.annotation.Import;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
@@ -57,11 +54,10 @@ public class ProcessFieldVisitIT {
 			assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED
 	)
 	@Test
-	// TODO fails on a DataIntegrityViolationException right now, the queries are only set up to make sure we're
-	// TODO hitting the db at this time.  The test result tables are also empty.
 	public void fullTest() {
 		RequestObject request = new RequestObject();
-		// TODO hardcoding a json_data_id for now
+		// TODO this passes but the database result is different from the result defined in testResult/fieldVisitHeaderInfo/fieldVisitHeaderInfo.csv
+		// TODO the database is right, the test is wrong...
 		request.setId(Long.valueOf(1));
 		ResultObject result = processFieldVisit.apply(request);
 		assertNotNull(result);

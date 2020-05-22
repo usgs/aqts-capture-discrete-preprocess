@@ -46,7 +46,7 @@ from (
     from (
       select
         jd.json_data_id,
-        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') inspection_activity
+        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') as inspection_activity
         from
           json_data jd
         where json_data_id = ?
