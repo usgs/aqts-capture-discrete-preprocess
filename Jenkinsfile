@@ -3,7 +3,7 @@
 pipeline {
   agent {
     node {
-      label 'project:any'
+      label 'team:iow'
     }
   }
   stages {
@@ -16,11 +16,13 @@ pipeline {
     }
     stage('get and install the zip file for lambda consumption') {
       agent {
-        dockerfile true
+      	dockerfile {
+		  label 'team:iow'
+		}
       }
       steps {
         sh '''
-          curl ${SHADED_JAR_ARTIFACT_URL} -Lo aqts-capture-ts-corrected-aws.jar
+          curl ${SHADED_JAR_ARTIFACT_URL} -Lo aqts-capture-ts-field-visit-aws.jar
           ls -al
           npm install
           ls -al

@@ -1,0 +1,1 @@
+select count(*) from json_data where json_data_id = ?;

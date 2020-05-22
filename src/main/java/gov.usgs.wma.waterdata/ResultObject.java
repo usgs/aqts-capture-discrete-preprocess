@@ -1,14 +1,17 @@
 package gov.usgs.wma.waterdata;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ResultObject {
-    private List<TimeSeries> timeSeriesList;
-    public List<TimeSeries> getTimeSeriesList() {
-        return null != timeSeriesList ? timeSeriesList: new ArrayList<TimeSeries>();
-    }
-    public void setTimeSeriesList(List<TimeSeries> timeSeriesList) {
-        this.timeSeriesList = timeSeriesList;
-    }
+	// lambda output - what will we be passing on to the transform step?
+
+	// definitely the json_data_id
+	private Long id;
+
+	// maybe other stuff, not sure yet
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
