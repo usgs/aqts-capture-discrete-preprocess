@@ -28,11 +28,11 @@ custom:
     connectInfo: ${ssm:/aws/reference/secretsmanager/NWCAPTURE-DB-${self:provider.stage}~true}
 
 functions:
-  preProcess:
-    handler: gov.usgs.wma.waterdata.PreProcessHandler
+  processFieldVisit:
+    handler: gov.usgs.wma.waterdata.ProcessFieldVisitHandler
     role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
     environment:
-      FUNCTION_NAME: preProcess
+      FUNCTION_NAME: processFieldVisit
       AQTS_DATABASE_ADDRESS: ${self:custom.db.connectInfo.DATABASE_ADDRESS}
       AQTS_DATABASE_PORT: ${self:custom.db.connectInfo.DATABASE_PORT}
       AQTS_SCHEMA_NAME: ${self:custom.db.connectInfo.SCHEMA_NAME}
@@ -59,7 +59,7 @@ resources:
         Dimensions:
           - Name: FunctionName
             Value:
-              Ref: PreProcessLambdaFunction
+              Ref: ProcessFieldVisitLambdaFunction
         MetricName: ConcurrentExecutions
         Statistic: Maximum
         ComparisonOperator: GreaterThanOrEqualToThreshold
@@ -77,7 +77,7 @@ resources:
         Dimensions:
           - Name: FunctionName
             Value:
-              Ref: PreProcessLambdaFunction
+              Ref: ProcessFieldVisitLambdaFunction
         MetricName: Errors
         Statistic: Sum
         ComparisonOperator: GreaterThanOrEqualToThreshold
