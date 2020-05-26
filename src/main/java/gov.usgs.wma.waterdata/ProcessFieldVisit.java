@@ -38,7 +38,7 @@ public class ProcessFieldVisit implements Function<RequestObject, ResultObject> 
 		// the updates will return a number of rows updated - maybe we'll want to return these for
 		// informational purposes on the result object
 
-//		fieldVisitDao.doHeaderInfo(jsonDataId);
+		fieldVisitDao.doHeaderInfo(jsonDataId);
 		fieldVisitDao.doReadings(jsonDataId);
 
 		result.setId(jsonDataId);

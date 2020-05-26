@@ -1,11 +1,11 @@
 insert into field_visit_readings (
-  	json_data_id,
+  json_data_id,
 	parameter,
 	monitoring_method,
 	field_visit_value,
 	unit,
 	uncertainty,
-    reading_type,
+  reading_type,
 	manufacturer,
 	model,
 	serial_number,
