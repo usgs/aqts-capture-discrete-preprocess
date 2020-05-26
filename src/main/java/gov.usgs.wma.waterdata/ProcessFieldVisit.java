@@ -31,13 +31,6 @@ public class ProcessFieldVisit implements Function<RequestObject, ResultObject> 
 		LOG.debug("json_data_id: {}", jsonDataId);
 		ResultObject result = new ResultObject();
 
-		// logic to insert the relevant field visit header and readings information
-		// from the json_data table and into the field_visit_header_info and field_visit_readings tables
-		// We'll use the FieldVisitDao to interact with the database
-
-		// the updates will return a number of rows updated - maybe we'll want to return these for
-		// informational purposes on the result object
-
 		fieldVisitDao.doHeaderInfo(jsonDataId);
 		fieldVisitDao.doReadings(jsonDataId);
 
