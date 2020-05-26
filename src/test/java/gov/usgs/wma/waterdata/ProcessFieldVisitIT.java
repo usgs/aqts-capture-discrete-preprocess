@@ -56,8 +56,6 @@ public class ProcessFieldVisitIT {
 	@Test
 	public void fullTest() {
 		RequestObject request = new RequestObject();
-		// TODO this passes but the database result is different from the result defined in testResult/fieldVisitHeaderInfo/fieldVisitHeaderInfo.csv
-		// TODO the database is right, the test is wrong...
 		request.setId(Long.valueOf(1));
 		ResultObject result = processFieldVisit.apply(request);
 		assertNotNull(result);

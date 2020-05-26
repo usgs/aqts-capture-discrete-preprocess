@@ -5,7 +5,7 @@ insert into field_visit_readings (
 	field_visit_value,
 	unit,
 	uncertainty,
-  reading_type,
+    reading_type,
 	manufacturer,
 	model,
 	serial_number,
