@@ -36,8 +36,7 @@ select
   jsonb_extract_path_text(b.reading, 'IsValid') is_valid,
   jsonb_extract_path_text(b.reading, 'ReferencePointUniqueId') reference_point_unique_id,
   jsonb_extract_path_text(b.reading, 'UseLocationDatumAsReference') use_location_datum_as_reference,
-  /* reading_qualifier wants path rather than path_text */
-  jsonb_extract_path(b.reading, 'ReadingQualifier') reading_qualifier,
+  jsonb_extract_path_text(b.reading, 'ReadingQualifier') reading_qualifier,
   jsonb_extract_path_text(b.reading, 'ReadingQualifiers') reading_qualifiers,
   jsonb_extract_path_text(b.reading, 'GroundWaterMeasurement') ground_water_measurement
 from (
