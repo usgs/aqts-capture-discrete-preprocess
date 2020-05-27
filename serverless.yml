@@ -59,7 +59,7 @@ resources:
         Dimensions:
           - Name: FunctionName
             Value:
-              Ref: ProcessFieldVisitLambdaFunction
+              Ref: PreProcessLambdaFunction
         MetricName: ConcurrentExecutions
         Statistic: Maximum
         ComparisonOperator: GreaterThanOrEqualToThreshold
@@ -77,7 +77,7 @@ resources:
         Dimensions:
           - Name: FunctionName
             Value:
-              Ref: ProcessFieldVisitLambdaFunction
+              Ref: PreProcessLambdaFunction
         MetricName: Errors
         Statistic: Sum
         ComparisonOperator: GreaterThanOrEqualToThreshold
