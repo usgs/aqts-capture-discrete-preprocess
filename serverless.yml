@@ -28,7 +28,7 @@ custom:
     connectInfo: ${ssm:/aws/reference/secretsmanager/NWCAPTURE-DB-${self:provider.stage}~true}
 
 functions:
-  processFieldVisit:
+  preProcess:
     handler: gov.usgs.wma.waterdata.ProcessFieldVisitHandler
     role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
     environment:
