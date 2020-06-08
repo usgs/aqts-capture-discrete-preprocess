@@ -1,26 +1,28 @@
 insert into field_visit_readings (
   json_data_id,
-	parameter,
-	monitoring_method,
-	field_visit_value,
-	unit,
-	uncertainty,
-    reading_type,
-	manufacturer,
-	model,
-	serial_number,
-	field_visit_time,
-	field_visit_comments,
-	publish,
-	is_valid,
-	reference_point_unique_id,
-	use_location_datum_as_reference,
-	reading_qualifier,
-	reading_qualifiers,
-	ground_water_measurement
+  field_visit_identifier,
+  parameter,
+  monitoring_method,
+  field_visit_value,
+  unit,
+  uncertainty,
+  reading_type,
+  manufacturer,
+  model,
+  serial_number,
+  field_visit_time,
+  field_visit_comments,
+  publish,
+  is_valid,
+  reference_point_unique_id,
+  use_location_datum_as_reference,
+  reading_qualifier,
+  reading_qualifiers,
+  ground_water_measurement
 )
 select
   b.json_data_id,
+  b.field_visit_identifier,
   jsonb_extract_path_text(b.reading, 'Parameter') parameter,
   jsonb_extract_path_text(b.reading, 'MonitoringMethod') monitoring_method,
   jsonb_extract_path_text(b.reading, 'Value') field_visit_value,
@@ -42,10 +44,12 @@ select
 from (
   select
     a.json_data_id,
+    jsonb_extract_path_text(a.field_visit_data, 'Identifier') field_visit_identifier,
     jsonb_array_elements(jsonb_extract_path(a.inspection_activity, 'Readings')) reading
     from (
       select
         jd.json_data_id,
+        jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')) as field_visit_data,
         jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') as inspection_activity
         from
           json_data jd
