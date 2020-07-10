@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -44,17 +45,26 @@ public class FieldVisitDaoIT {
 
 	@Autowired
 	private FieldVisitDao fieldVisitDao;
+	private RequestObject request;
 
 	public static final Long JSON_DATA_ID_1 = 1l;
 	public static final Long JSON_DATA_ID_3 = 3l;
 	public static final Long JSON_DATA_ID_4 = 4l;
+	public static final Integer PARTITION_NUMBER = 7;
+
+	@BeforeEach
+	public void beforeEach() {
+		request = new RequestObject();
+		request.setId(JSON_DATA_ID_1);
+		request.setPartitionNumber(PARTITION_NUMBER);
+	}
 
 	@DatabaseSetup("classpath:/testData/cleanseOutput/")
 	@ExpectedDatabase(value="classpath:/testResult/fieldVisitHeaderInfo/", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@Test
 	public void doHeaderInfoTest() {
 		assertDoesNotThrow(() -> {
-			fieldVisitDao.doHeaderInfo(JSON_DATA_ID_1);
+			fieldVisitDao.doHeaderInfo(request);
 		}, "should not have thrown an exception but did");
 	}
 
@@ -62,8 +72,9 @@ public class FieldVisitDaoIT {
 	@ExpectedDatabase(value="classpath:/testData/cleanseOutput/", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@Test
 	public void doHeaderInfoBadIdTest() {
+		request.setId(JSON_DATA_ID_3);
 		assertDoesNotThrow(() -> {
-			fieldVisitDao.doHeaderInfo(JSON_DATA_ID_3);
+			fieldVisitDao.doHeaderInfo(request);
 		}, "should not have thrown an exception but did");
 	}
 
@@ -72,7 +83,7 @@ public class FieldVisitDaoIT {
 	@Test
 	public void doReadingsTest() {
 		assertDoesNotThrow(() -> {
-			fieldVisitDao.doReadings(JSON_DATA_ID_1);
+			fieldVisitDao.doReadings(request);
 		}, "should not have thrown an exception but did");
 	}
 
@@ -80,8 +91,9 @@ public class FieldVisitDaoIT {
 	@ExpectedDatabase(value="classpath:/testData/cleanseOutput/", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@Test
 	public void doReadingsBadIdTest() {
+		request.setId(JSON_DATA_ID_3);
 		assertDoesNotThrow(() -> {
-			fieldVisitDao.doReadings(JSON_DATA_ID_3);
+			fieldVisitDao.doReadings(request);
 		}, "should not have thrown an exception but did");
 	}
 
@@ -90,8 +102,9 @@ public class FieldVisitDaoIT {
 	@ExpectedDatabase(value="classpath:/testData/cleanseOutput/", assertionMode=DatabaseAssertionMode.NON_STRICT_UNORDERED)
 	@Test
 	public void doHeaderInfoNoIdTest() {
+		request.setId(JSON_DATA_ID_4);
 		assertDoesNotThrow(() -> {
-			fieldVisitDao.doHeaderInfo(JSON_DATA_ID_4);
+			fieldVisitDao.doHeaderInfo(request);
 		}, "should not have thrown an exception but did");
 	}
 

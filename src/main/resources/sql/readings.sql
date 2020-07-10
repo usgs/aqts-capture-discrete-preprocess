@@ -18,7 +18,8 @@ insert into field_visit_readings (
   use_location_datum_as_reference,
   reading_qualifier,
   reading_qualifiers,
-  ground_water_measurement
+  ground_water_measurement,
+  partition_number
 )
 select
   b.json_data_id,
@@ -40,19 +41,23 @@ select
   jsonb_extract_path_text(b.reading, 'UseLocationDatumAsReference') use_location_datum_as_reference,
   jsonb_extract_path_text(b.reading, 'ReadingQualifier') reading_qualifier,
   jsonb_extract_path_text(b.reading, 'ReadingQualifiers') reading_qualifiers,
-  jsonb_extract_path_text(b.reading, 'GroundWaterMeasurement') ground_water_measurement
+  jsonb_extract_path_text(b.reading, 'GroundWaterMeasurement') ground_water_measurement,
+  b.partition_number
 from (
   select
     a.json_data_id,
     jsonb_extract_path_text(a.field_visit_data, 'Identifier') field_visit_identifier,
-    jsonb_array_elements(jsonb_extract_path(a.inspection_activity, 'Readings')) reading
+    jsonb_array_elements(jsonb_extract_path(a.inspection_activity, 'Readings')) reading,
+    a.partition_number
     from (
       select
         jd.json_data_id,
         jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')) as field_visit_data,
-        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') as inspection_activity
+        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') as inspection_activity,
+        jd.partition_number
         from
           json_data jd
         where json_data_id = ?
+        and partition_number = ?
     ) a
 ) b;

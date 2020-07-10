@@ -50,7 +50,8 @@ public class ProcessFieldVisitIT {
 	@Test
 	public void fullTest() {
 		RequestObject request = new RequestObject();
-		request.setId(Long.valueOf(1));
+		request.setId(FieldVisitDaoIT.JSON_DATA_ID_1);
+		request.setPartitionNumber(FieldVisitDaoIT.PARTITION_NUMBER);
 		ResultObject result = processFieldVisit.apply(request);
 		assertNotNull(result);
 		assertEquals(1, result.getId());
@@ -63,6 +64,7 @@ public class ProcessFieldVisitIT {
 	public void badIdTest() {
 		RequestObject request = new RequestObject();
 		request.setId(FieldVisitDaoIT.JSON_DATA_ID_4);
+		request.setPartitionNumber(FieldVisitDaoIT.PARTITION_NUMBER);
 		processFieldVisit.apply(request);
 
 		request.setId(FieldVisitDaoIT.JSON_DATA_ID_3);

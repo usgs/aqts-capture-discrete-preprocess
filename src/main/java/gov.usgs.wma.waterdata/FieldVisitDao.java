@@ -26,18 +26,21 @@ public class FieldVisitDao {
 	private Resource readings;
 
 	@Transactional
-	public void doHeaderInfo(Long jsonDataId) {
-		doUpdate(jsonDataId, headerInfo);
+	public void doHeaderInfo(RequestObject request) {
+		doUpdate(request, headerInfo);
 	}
 
 	@Transactional
-	public void doReadings(Long jsonDataId) {
-		doUpdate(jsonDataId, readings);
+	public void doReadings(RequestObject request) {
+		doUpdate(request, readings);
 	}
 
 	@Transactional
-	protected void doUpdate(Long jsonDataId, Resource resource) {
-		jdbcTemplate.update(getSql(resource), jsonDataId);
+	protected void doUpdate(RequestObject request, Resource resource) {
+		jdbcTemplate.update(
+				getSql(resource),
+				request.getId(),
+				request.getPartitionNumber());
 	}
 
 	protected String getSql(Resource resource) {
