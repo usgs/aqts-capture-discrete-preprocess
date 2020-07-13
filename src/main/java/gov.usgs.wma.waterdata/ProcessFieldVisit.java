@@ -31,8 +31,8 @@ public class ProcessFieldVisit implements Function<RequestObject, ResultObject> 
 		LOG.debug("json_data_id: {}", jsonDataId);
 		ResultObject result = new ResultObject();
 
-		fieldVisitDao.doHeaderInfo(jsonDataId);
-		fieldVisitDao.doReadings(jsonDataId);
+		fieldVisitDao.doHeaderInfo(request);
+		fieldVisitDao.doReadings(request);
 
 		result.setId(jsonDataId);
 
