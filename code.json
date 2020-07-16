@@ -3,7 +3,7 @@
     "name": "AQTS Capture Discrete Preprocess",
     "organization": "U.S. Geological Survey",
     "description": "Splits discrete data up into individual time steps.",
-    "version": "0.1.${revision}",
+    "version": "0.2.${revision}",
     "status": "Development",
 
     "permissions": {
