@@ -52,8 +52,8 @@ from (
     from (
       select
         jd.json_data_id,
-        jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')) as field_visit_data,
-        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jd.json_content, 'FieldVisitData')), 'InspectionActivity') as inspection_activity,
+        jsonb_array_elements(jsonb_extract_path(jsonb_extract_path(jd.json_content, 'FieldVisitDataResponse'), 'FieldVisitData')) as field_visit_data,
+        jsonb_extract_path(jsonb_array_elements(jsonb_extract_path(jsonb_extract_path(jd.json_content, 'FieldVisitDataResponse'), 'FieldVisitData')), 'InspectionActivity') as inspection_activity,
         jd.partition_number
         from
           json_data jd
