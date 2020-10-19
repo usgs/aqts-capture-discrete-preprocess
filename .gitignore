@@ -2,3 +2,5 @@ aqts-capture-ts-field-visit.iml
 application.yml
 .idea/
 target/
+.serverless/
+node_modules/
