@@ -5,22 +5,23 @@ provider:
   region: ${opt:region, 'us-west-2'}
   stage: ${opt:stage, 'TEST'}
   runtime: java11
-  memorySize: 768
+  memorySize: 384
   timeout: 90
   logRetentionInDays: 90
   deploymentBucket:
-    name: iow-cloud-applications
+    name: ${opt:bucket, iow-cloud-applications}
   stackTags:
     "wma:applicationId": "AQTS Capture Time Series Field Visit"
     "wma:contact": "Jim Kreft jkreft@usgs.gov"
     "wma:environment": ${self:provider.stage}
     "wma:taggingVersion": ${opt:taggingVersion}
     "wma:costCenter": TBD
+    "wma:organization": IOW
+    "displayName": "TS FV"
     commitIdentifier: ${git:sha1}
 
 custom:
   exportGitVariables: false
-  accountNumber : ${ssm:/iow/aws/accountNumber}
   vpc:
     securityGroupIds: ${ssm:/iow/retriever-capture/${self:provider.stage}/securityGroupIds~split}
     subnetIds: ${ssm:/iow/aws/vpc/${self:provider.stage}/subnetIds~split}
@@ -30,7 +31,7 @@ custom:
 functions:
   preProcess:
     handler: gov.usgs.wma.waterdata.ProcessFieldVisitHandler
-    role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
+    role: arn:aws:iam::#{AWS::AccountId}:role/csr-Lambda-Role
     environment:
       FUNCTION_NAME: processFieldVisit
       AQTS_DATABASE_ADDRESS: ${self:custom.db.connectInfo.DATABASE_ADDRESS}
@@ -89,6 +90,7 @@ resources:
 
 plugins:
   - serverless-plugin-git-variables
+  - serverless-pseudo-parameters
 
 package:
   artifact: aqts-capture-ts-field-visit-aws.jar
