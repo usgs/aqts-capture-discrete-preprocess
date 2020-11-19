@@ -10,7 +10,6 @@
     <properties>
         <java.version>11</java.version>
         <revision>0-DEFAULT</revision>
-        <wma.maven.url>https://artifactory.wma.chs.usgs.gov/artifactory</wma.maven.url>
     </properties>
 
     <licenses>
@@ -38,30 +37,12 @@
         <tag>HEAD</tag>
     </scm>
 
-    <repositories>
-        <repository>
-            <id>Central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
-        <repository>
-            <id>WMA</id>
-            <name>WMA Artifactory</name>
-            <url>${wma.maven.url}/list/wma-maven-centralized/</url>
-        </repository>
-    </repositories>
-
     <distributionManagement>
         <repository>
             <id>wma-maven-releases</id>
             <name>wma-maven-releases</name>
             <url>${wma.maven.url}/wma-maven-releases</url>
         </repository>
-        <snapshotRepository>
-            <id>wma-maven-snapshots</id>
-            <name>wma-maven-snapshots</name>
-            <url>${wma.maven.url}/wma-maven-snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <parent>
@@ -74,12 +55,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-function-adapter-aws</artifactId>
-            <version>3.0.10.RELEASE</version>
+            <version>3.0.11.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-events</artifactId>
-            <version>3.4.0</version>
+            <version>3.6.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -161,7 +142,7 @@
                     <dependency>
                         <groupId>org.springframework.boot.experimental</groupId>
                         <artifactId>spring-boot-thin-layout</artifactId>
-                        <version>1.0.25.RELEASE</version>
+                        <version>1.0.26.RELEASE</version>
                     </dependency>
                 </dependencies>
             </plugin>
