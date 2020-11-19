@@ -34,7 +34,7 @@ mvn verify \
     -DTESTING_DATABASE_NETWORK=aqts \
 ```
 
-### Database Integration Testing with an IDE
+### Database Integration Testing with an IDE 
 To run tests against local transform and observation Docker databases use:
 
 Transform database:
