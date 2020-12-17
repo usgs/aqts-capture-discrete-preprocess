@@ -11,13 +11,15 @@ provider:
   stage: ${opt:stage, 'TEST'}
   runtime: java11
   memorySize: 384
-  timeout: 10
+  timeout: 90
   logRetentionInDays: 90
   vpc: ${self:custom.vpc}
   deploymentBucket:
     name: ${opt:bucket, iow-cloud-applications}
   stackTags:
-    "wma:applicationId": "AQTS Capture Time Series Field Visit"
+    "wma:project_id": "aqtscapture"
+    "wma:subSystem": "aqtscapture"
+    "wma:application_id": "AQTS Capture Time Series Field Visit"
     "wma:contact": "Jim Kreft jkreft@usgs.gov"
     "wma:environment": ${self:provider.stage}
     "wma:taggingVersion": ${opt:taggingVersion}
